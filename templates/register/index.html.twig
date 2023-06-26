@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('failed') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+<div class="col-12 col-lg-6 mx-auto">
+    <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+
+    {{ form(form) }}
+</div>
+{% endblock %}

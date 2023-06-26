@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h3>Active Job Listings</h3>
+    <div class="row">
+    {% for job in jobs %}
+        <div class="col-12 col-lg-4 col-md-6 col-xs-12">
+            <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="card-title"><span class="fi fi-{{ job.country|lower }}"></span> {{ job.title }}</h5>
+                <small class="text-uppercase">Starting salary : {{ job.salary|number_format(0, ',', ',') }}</small>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ job.description|slice(0, 155) }}...</p>
+                <a class="btn btn-success float-right w-25" href="{{ path('job.view', {id:job.id}) }}">View</a>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
