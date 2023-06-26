@@ -33,6 +33,10 @@ class Job
     #[Assert\NotBlank()]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "posted_by_id", referencedColumnName: "id", nullable: false)]
+    private ?User $postedBy = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,6 +98,18 @@ class Job
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPostedBy(): ?User
+    {
+        return $this->postedBy;
+    }
+
+    public function setPostedBy(User $user): self
+    {
+        $this->postedBy = $user;
 
         return $this;
     }
